@@ -1,0 +1,240 @@
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background: transparent;
+  transition: all 0.3s ease;
+  padding: 20px 0;
+}
+
+.navbar.scrolled {
+  background: var(--navbar-bg);
+  padding: 12px 0;
+  box-shadow: 0 4px 30px var(--shadow-md);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+}
+
+.navbar-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+}
+
+.navbar-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  font-size: 1.3rem;
+  color: var(--hero-text);
+  font-weight: 600;
+  flex-shrink: 0;
+  transition: opacity 0.2s;
+}
+
+.navbar.scrolled .navbar-logo {
+  color: var(--text-primary);
+}
+
+.navbar-logo:hover {
+  opacity: 0.85;
+}
+
+.navbar-logo strong {
+  font-weight: 800;
+  color: #1E6FFF;
+}
+
+.logo-icon {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-links {
+  display: flex;
+  list-style: none;
+  gap: 4px;
+  flex: 1;
+  justify-content: center;
+}
+
+.navbar-links a {
+  text-decoration: none;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.875rem;
+  font-weight: 500;
+  padding: 8px 12px;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.navbar.scrolled .navbar-links a {
+  color: var(--text-secondary);
+}
+
+.navbar-links a:hover,
+.navbar-links a.active {
+  color: #1E6FFF;
+  background: var(--accent-light);
+}
+
+.navbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.theme-toggle {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.25s ease;
+}
+
+.navbar.scrolled .theme-toggle {
+  background: var(--accent-light);
+  border-color: var(--border);
+  color: var(--accent);
+}
+
+.theme-toggle:hover {
+  transform: scale(1.05);
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.navbar.scrolled .theme-toggle:hover {
+  background: var(--accent);
+  color: white;
+  border-color: var(--accent);
+}
+
+.navbar-cta {
+  padding: 10px 22px;
+  font-size: 0.875rem;
+}
+
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+}
+
+.hamburger span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: white;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+.navbar.scrolled .hamburger span {
+  background: var(--text-primary);
+}
+
+.hamburger.open span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.hamburger.open span:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger.open span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+.mobile-menu {
+  display: none;
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height 0.3s ease, padding 0.3s ease;
+  background: var(--navbar-bg);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+}
+
+.mobile-menu.open {
+  max-height: 600px;
+}
+
+.mobile-menu ul {
+  list-style: none;
+  padding: 16px 24px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.mobile-menu a {
+  display: block;
+  text-decoration: none;
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  font-weight: 500;
+  padding: 10px 14px;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+
+.mobile-menu a:hover,
+.mobile-menu a.active {
+  color: var(--accent);
+  background: var(--accent-light);
+}
+
+@media (max-width: 1024px) {
+  .navbar-links {
+    display: none;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+
+  .mobile-menu {
+    display: block;
+  }
+
+  .navbar-cta {
+    display: none;
+  }
+}
+
+/* ── Logo image ── */
+.navbar-logo {
+  padding: 2px 0;
+}
+
+.logo-img {
+  height: 42px;
+  width: auto;
+  object-fit: contain;
+  display: block;
+  transition: opacity 0.2s;
+}
+
+.navbar-logo:hover .logo-img {
+  opacity: 0.85;
+}

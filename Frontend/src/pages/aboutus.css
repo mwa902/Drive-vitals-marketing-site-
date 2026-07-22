@@ -1,0 +1,163 @@
+/* ── Hero ── */
+.about-hero {
+  padding: 160px 0 100px;
+  background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
+}
+
+.about-hero-content .section-title,
+.about-hero-content .section-subtitle {
+  color: white;
+}
+
+.about-hero-content .section-subtitle {
+  opacity: 0.85;
+}
+
+/* ── Story ── */
+.story-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: start;
+}
+
+.story-text p {
+  color: var(--text-secondary);
+  line-height: 1.8;
+  margin-bottom: 20px;
+}
+
+.story-milestones {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.milestone-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 20px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  transition: all 0.25s ease;
+}
+
+.milestone-item:hover {
+  border-color: var(--accent);
+  transform: translateX(4px);
+}
+
+.milestone-year {
+  font-weight: 700;
+  color: var(--accent);
+  font-size: 0.9rem;
+  white-space: nowrap;
+}
+
+.milestone-event {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+/* ── Values ── */
+.value-card {
+  text-align: center;
+}
+
+.value-icon {
+  font-size: 2.5rem;
+  margin-bottom: 16px;
+}
+
+.value-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: var(--text-primary);
+}
+
+.value-desc {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  line-height: 1.7;
+}
+
+/* ── Team ── */
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.team-card {
+  text-align: center;
+}
+
+.team-avatar {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 1.2rem;
+  color: white;
+  margin: 0 auto 16px;
+}
+
+.team-name {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+
+.team-role {
+  font-size: 0.82rem;
+  color: var(--accent);
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.team-bio {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .story-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .team-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .about-hero {
+    padding: 120px 0 70px;
+  }
+}
+
+@media (max-width: 480px) {
+  .team-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ── Section background helpers ── */
+.about-story-section {
+  background: var(--bg-secondary);
+}
+
+.about-team-section {
+  background: var(--bg-secondary);
+}
+
+.section-subtitle-center {
+  margin: 0 auto;
+}
