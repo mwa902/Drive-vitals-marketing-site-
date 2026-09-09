@@ -133,103 +133,171 @@
 }
 
 /* ══════════════════════════════════════════════════
-   THEME TOGGLE — Right-side icon button
-   Clean circular button, always visible, sticks to
-   the navbar. Rotates icon on switch with glow ring.
+   OLD INLINE THEME TOGGLE — removed (now fixed pill)
 ══════════════════════════════════════════════════ */
-.theme-toggle {
+.theme-toggle        { display: none; }
+.theme-toggle-inner  { display: none; }
+.theme-icon-wrap     { display: none; }
+
+/* ══════════════════════════════════════════════════
+   FIXED VERTICAL THEME TOGGLE PILL
+   — right edge of viewport, vertically centered
+   — scroll progress track runs behind the knob
+══════════════════════════════════════════════════ */
+.theme-pill-fixed {
+  position: fixed;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1200;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+
+  /* Outer pill container */
+  background: var(--bg-card);
+  border: 1.5px solid var(--border);
+  border-radius: 40px;
+  padding: 6px;
+  box-shadow: 0 8px 32px var(--shadow-md),
+              0 0 0 1px rgba(30,111,255,0.08);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+  width: 48px;
+}
+.theme-pill-fixed:hover {
+  border-color: var(--accent);
+  box-shadow: 0 12px 40px var(--shadow-md),
+              0 0 20px var(--accent-glow);
+}
+
+/* ── Scroll progress track (behind everything) ── */
+.tpb-progress-track {
+  position: absolute;
+  top: 6px;
+  bottom: 6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 3px;
+  background: var(--border);
+  border-radius: 3px;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+.tpb-progress-fill {
+  width: 100%;
+  background: linear-gradient(to bottom, #1E6FFF, #7C3AED);
+  border-radius: 3px;
+  transition: height 0.1s linear;
+  height: 0%;
+}
+
+/* ── Toggle button itself ── */
+.theme-pill-btn {
   position: relative;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.1);
-  border: 1.5px solid rgba(255, 255, 255, 0.22);
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  background: none;
+  border: none;
   cursor: pointer;
+  padding: 4px 0;
+  width: 100%;
+}
+
+/* Sun / Moon icons */
+.tpb-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: background 0.3s ease, border-color 0.3s ease,
-              box-shadow 0.3s ease, transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
-  overflow: hidden;
+  color: var(--text-muted);
+  transition: color 0.3s ease,
+              background 0.3s ease,
+              transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
   flex-shrink: 0;
 }
-
-/* Glowing ring on hover */
-.theme-toggle::before {
-  content: '';
-  position: absolute;
-  inset: -4px;
-  border-radius: 50%;
-  border: 2px solid var(--accent);
-  opacity: 0;
-  transform: scale(0.7);
-  transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-.theme-toggle:hover::before {
-  opacity: 0.6;
-  transform: scale(1);
-}
-
-/* Shimmer sweep on hover */
-.theme-toggle::after {
-  content: '';
-  position: absolute;
-  top: -50%;
-  left: -75%;
-  width: 50%;
-  height: 200%;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
-  transform: skewX(-20deg);
-  transition: left 0.5s ease;
-  pointer-events: none;
-}
-.theme-toggle:hover::after { left: 125%; }
-
-.navbar.scrolled .theme-toggle {
-  background: var(--accent-light);
-  border-color: var(--border);
+.tpb-icon.tpb-active {
   color: var(--accent);
+  background: var(--accent-light);
+  transform: scale(1.15);
 }
-.theme-toggle:hover {
-  transform: scale(1.1);
-  background: rgba(255,255,255,0.18);
-  border-color: rgba(255,255,255,0.45);
-  box-shadow: 0 0 20px rgba(30,111,255,0.35);
-}
-.navbar.scrolled .theme-toggle:hover {
+.tpb-sun  { order: 1; }
+.tpb-moon { order: 3; }
+
+/* Sliding knob */
+.tpb-knob {
+  order: 2;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
   background: var(--accent);
-  border-color: var(--accent);
-  color: white;
-  box-shadow: 0 4px 20px var(--accent-glow);
-}
-
-/* Icon container — clips and flips icons */
-.theme-toggle-inner {
+  box-shadow: 0 4px 16px var(--accent-glow),
+              0 0 0 3px rgba(30,111,255,0.18);
+  transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1),
+              background 0.3s ease,
+              box-shadow 0.3s ease;
+  flex-shrink: 0;
   position: relative;
-  width: 18px; height: 18px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  overflow: hidden;
 }
-.theme-icon-wrap {
+/* Shimmer inside knob */
+.tpb-knob::after {
+  content: '';
   position: absolute;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: rgba(255,255,255,0.9);
-  transition: opacity 0.3s ease, transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  top: -50%; left: -75%;
+  width: 50%; height: 200%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.35), transparent);
+  transform: skewX(-20deg);
+  animation: knobShimmer 3s ease-in-out infinite;
 }
-.navbar.scrolled .theme-icon-wrap { color: var(--accent); }
-.navbar.scrolled .theme-toggle:hover .theme-icon-wrap { color: white; }
+@keyframes knobShimmer {
+  0%,60%  { left: -75%; }
+  80%     { left: 125%; }
+  100%    { left: 125%; }
+}
 
-.theme-icon-wrap.show {
-  opacity: 1;
-  transform: rotate(0deg) scale(1);
+/* Dark mode: knob shifts down visually (sun is at top = light, moon at bottom = dark) */
+.tpb-knob.tpb-knob-dark {
+  background: #7C3AED;
+  box-shadow: 0 4px 16px rgba(124,58,237,0.4),
+              0 0 0 3px rgba(124,58,237,0.18);
 }
-.theme-icon-wrap.hide {
+
+/* Hover: knob pulses */
+.theme-pill-btn:hover .tpb-knob {
+  transform: scale(1.1);
+}
+
+/* Label tooltip on hover */
+.theme-pill-fixed::after {
+  content: attr(data-tip);
+  position: absolute;
+  right: calc(100% + 10px);
+  top: 50%;
+  transform: translateY(-50%);
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  font-size: 0.72rem;
+  font-weight: 600;
+  white-space: nowrap;
+  padding: 5px 10px;
+  border-radius: 8px;
+  box-shadow: 0 4px 16px var(--shadow);
   opacity: 0;
-  transform: rotate(90deg) scale(0.4);
   pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+.theme-pill-fixed:hover::after {
+  opacity: 1;
 }
 
 /* ── CTA button ── */
@@ -388,8 +456,16 @@
   .navbar-links { display: none; }
   .hamburger    { display: flex; }
   .navbar-cta   { display: none; }
-  /* theme toggle stays visible on mobile — it's on the right of hamburger */
-  .theme-toggle { width: 36px; height: 36px; }
+}
+
+/* Pill stays visible on all screen sizes — shrink slightly on mobile */
+@media (max-width: 768px) {
+  .theme-pill-fixed {
+    right: 10px;
+    width: 42px;
+  }
+  .tpb-icon { width: 28px; height: 28px; }
+  .tpb-knob { width: 24px; height: 24px; }
 }
 
 @media (max-width: 480px) {

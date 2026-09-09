@@ -3,6 +3,27 @@ import { useTheme } from './theme';
 import './navbar.css';
 import LogoSVG from './LogoSVG';
 
+/* ── Scroll progress bar — fills inside the pill track ── */
+function ScrollProgressBar() {
+  const [progress, setProgress] = useState(0);
+
+  useEffect(() => {
+    const onScroll = () => {
+      const el  = document.documentElement;
+      const pct = (el.scrollTop / (el.scrollHeight - el.clientHeight)) * 100;
+      setProgress(Math.min(100, Math.max(0, pct)));
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  return (
+    <div className="tpb-progress-track">
+      <div className="tpb-progress-fill" style={{ height: `${progress}%` }} />
+    </div>
+  );
+}
+
 const navLinks = [
   { label: 'Home',           href: '#home' },
   { label: 'Features',       href: '#features' },
@@ -115,7 +136,7 @@ export default function Navbar() {
           ))}
         </ul>
 
-        {/* ── Right controls: CTA + theme toggle + hamburger ── */}
+        {/* ── Right controls: CTA + hamburger (theme toggle moved to fixed pill) ── */}
         <div className="navbar-actions">
 
           <a
@@ -128,23 +149,6 @@ export default function Navbar() {
               <path d="M5 12h14M12 5l7 7-7 7"/>
             </svg>
           </a>
-
-          {/* Theme toggle — right side, clean icon button */}
-          <button
-            className="theme-toggle"
-            onClick={toggleTheme}
-            aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
-            title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
-          >
-            <span className="theme-toggle-inner">
-              <span className={`theme-icon-wrap ${theme === 'dark' ? 'show' : 'hide'}`}>
-                <SunIcon />
-              </span>
-              <span className={`theme-icon-wrap ${theme === 'light' ? 'show' : 'hide'}`}>
-                <MoonIcon />
-              </span>
-            </span>
-          </button>
 
           <button
             className={`hamburger${menuOpen ? ' open' : ''}`}
@@ -194,6 +198,37 @@ export default function Navbar() {
             </a>
           </li>
         </ul>
+      </div>
+
+      {/* ══════════════════════════════════════════════════
+          FIXED VERTICAL THEME TOGGLE PILL
+          Sticks to the right edge of the viewport,
+          vertically centered. Sun on top, Moon on bottom.
+      ══════════════════════════════════════════════════ */}
+      <div className="theme-pill-fixed">
+        {/* Scroll progress bar inside the pill track */}
+        <ScrollProgressBar />
+
+        {/* Toggle button — centered inside the pill */}
+        <button
+          className="theme-pill-btn"
+          onClick={toggleTheme}
+          aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
+          title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+        >
+          {/* Sun icon — top */}
+          <span className={`tpb-icon tpb-sun${theme === 'light' ? ' tpb-active' : ''}`}>
+            <SunIcon />
+          </span>
+
+          {/* Sliding knob */}
+          <span className={`tpb-knob${theme === 'dark' ? ' tpb-knob-dark' : ''}`} />
+
+          {/* Moon icon — bottom */}
+          <span className={`tpb-icon tpb-moon${theme === 'dark' ? ' tpb-active' : ''}`}>
+            <MoonIcon />
+          </span>
+        </button>
       </div>
     </nav>
   );
