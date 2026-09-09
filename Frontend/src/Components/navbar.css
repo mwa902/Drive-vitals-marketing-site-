@@ -133,171 +133,254 @@
 }
 
 /* ══════════════════════════════════════════════════
-   OLD INLINE THEME TOGGLE — removed (now fixed pill)
+   SCROLL-TRACK THEME TOGGLE
+   Portalled to <body> — fixed right edge,
+   vertically centered in viewport.
+   Knob `top` is set by JS (0 → track_h - knob_h).
 ══════════════════════════════════════════════════ */
-.theme-toggle        { display: none; }
-.theme-toggle-inner  { display: none; }
-.theme-icon-wrap     { display: none; }
-
-/* ══════════════════════════════════════════════════
-   FIXED VERTICAL THEME TOGGLE PILL
-   — right edge of viewport, vertically centered
-   — scroll progress track runs behind the knob
-══════════════════════════════════════════════════ */
-.theme-pill-fixed {
+.stt-wrap {
+  /* Fixed to right edge, centered vertically */
   position: fixed;
-  right: 16px;
+  right: 20px;
   top: 50%;
   transform: translateY(-50%);
-  z-index: 1200;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0;
+  z-index: 99999;            /* on top of everything */
 
-  /* Outer pill container */
-  background: var(--bg-card);
-  border: 1.5px solid var(--border);
-  border-radius: 40px;
-  padding: 6px;
-  box-shadow: 0 8px 32px var(--shadow-md),
-              0 0 0 1px rgba(30,111,255,0.08);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  transition: box-shadow 0.3s ease, border-color 0.3s ease;
-  width: 48px;
-}
-.theme-pill-fixed:hover {
-  border-color: var(--accent);
-  box-shadow: 0 12px 40px var(--shadow-md),
-              0 0 20px var(--accent-glow);
+  /* Sizing — must match JS constants */
+  --track-h: 160px;
+  --knob-d:  44px;
+
+  width: var(--knob-d);
+  height: var(--track-h);
+
+  /* Must NOT clip the knob */
+  overflow: visible;
+
+  /* No background on wrapper itself */
+  background: transparent;
+  pointer-events: none;   /* wrapper is transparent to mouse… */
 }
 
-/* ── Scroll progress track (behind everything) ── */
-.tpb-progress-track {
+/* …but the knob itself captures events */
+.stt-knob { pointer-events: all; }
+
+/* ── Vertical track line ── */
+.stt-track {
   position: absolute;
-  top: 6px;
-  bottom: 6px;
   left: 50%;
+  top: 0;
+  bottom: 0;
   transform: translateX(-50%);
   width: 3px;
   background: var(--border);
   border-radius: 3px;
   overflow: hidden;
   pointer-events: none;
-  z-index: 0;
+  /* Nice frosted appearance */
+  box-shadow: 0 0 8px rgba(30,111,255,0.12);
 }
-.tpb-progress-fill {
-  width: 100%;
+
+/* Filled gradient that grows as page scrolls */
+.stt-track-fill {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 0%;
   background: linear-gradient(to bottom, #1E6FFF, #7C3AED);
   border-radius: 3px;
-  transition: height 0.1s linear;
-  height: 0%;
+  transition: height 0.08s linear;
+  box-shadow: 0 0 6px rgba(30,111,255,0.4);
 }
 
-/* ── Toggle button itself ── */
-.theme-pill-btn {
-  position: relative;
-  z-index: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 6px;
-  background: none;
+/* Cap dots — top and bottom of track */
+.stt-dot {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--border);
+  pointer-events: none;
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+.stt-dot-top    { top: -4px; }
+.stt-dot-bottom { bottom: -4px; }
+.stt-wrap:hover .stt-dot {
+  background: var(--accent);
+  box-shadow: 0 0 8px var(--accent-glow);
+}
+
+/* ── Knob — the actual toggle button ── */
+.stt-knob {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: var(--knob-d);
+  height: var(--knob-d);
+  border-radius: 50%;
   border: none;
   cursor: pointer;
-  padding: 4px 0;
-  width: 100%;
-}
-
-/* Sun / Moon icons */
-.tpb-icon {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--text-muted);
-  transition: color 0.3s ease,
-              background 0.3s ease,
-              transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
-  flex-shrink: 0;
-}
-.tpb-icon.tpb-active {
-  color: var(--accent);
-  background: var(--accent-light);
-  transform: scale(1.15);
-}
-.tpb-sun  { order: 1; }
-.tpb-moon { order: 3; }
+  overflow: visible;
 
-/* Sliding knob */
-.tpb-knob {
-  order: 2;
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  background: var(--accent);
-  box-shadow: 0 4px 16px var(--accent-glow),
-              0 0 0 3px rgba(30,111,255,0.18);
-  transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1),
-              background 0.3s ease,
-              box-shadow 0.3s ease;
-  flex-shrink: 0;
+  /* JS sets `top` in px — smooth glide */
+  transition: top 0.12s cubic-bezier(0.22, 1, 0.36, 1),
+              box-shadow 0.3s ease,
+              transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* ── Light mode: warm golden sun ── */
+.stt-light {
+  background: linear-gradient(135deg, #FBBF24 0%, #F59E0B 100%);
+  box-shadow:
+    0 4px 20px rgba(251,191,36,0.55),
+    0 0 0 3px rgba(251,191,36,0.18),
+    inset 0 1px 0 rgba(255,255,255,0.35);
+}
+.stt-light .stt-icon { color: #fff; }
+
+/* ── Dark mode: deep purple moon ── */
+.stt-dark {
+  background: linear-gradient(135deg, #4C1D95 0%, #7C3AED 100%);
+  box-shadow:
+    0 4px 20px rgba(124,58,237,0.65),
+    0 0 0 3px rgba(124,58,237,0.22),
+    inset 0 1px 0 rgba(255,255,255,0.14);
+}
+.stt-dark .stt-icon { color: #fff; }
+
+/* ── Hover ── */
+.stt-knob:hover,
+.stt-knob.stt-hovered {
+  transform: translateX(-50%) scale(1.2);
+}
+.stt-light:hover, .stt-light.stt-hovered {
+  box-shadow:
+    0 8px 36px rgba(251,191,36,0.75),
+    0 0 0 6px rgba(251,191,36,0.2),
+    0 0 70px rgba(251,191,36,0.3),
+    inset 0 1px 0 rgba(255,255,255,0.35);
+}
+.stt-dark:hover, .stt-dark.stt-hovered {
+  box-shadow:
+    0 8px 36px rgba(124,58,237,0.85),
+    0 0 0 6px rgba(124,58,237,0.25),
+    0 0 70px rgba(124,58,237,0.35),
+    inset 0 1px 0 rgba(255,255,255,0.14);
+}
+.stt-knob:active {
+  transform: translateX(-50%) scale(0.9);
+}
+
+/* ── Icon ── */
+.stt-icon {
   position: relative;
-  overflow: hidden;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
-/* Shimmer inside knob */
-.tpb-knob::after {
-  content: '';
+/* Spin animation fires only when `spinning` state is true */
+.stt-spin {
+  animation: sttSpin 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+@keyframes sttSpin {
+  from { transform: rotate(-200deg) scale(0.4); }
+  to   { transform: rotate(0deg)    scale(1); }
+}
+
+/* ── Pulsing outer ring ── */
+.stt-ring {
   position: absolute;
-  top: -50%; left: -75%;
-  width: 50%; height: 200%;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.35), transparent);
-  transform: skewX(-20deg);
-  animation: knobShimmer 3s ease-in-out infinite;
+  inset: -5px;
+  border-radius: 50%;
+  border: 2px solid;
+  opacity: 0;
+  transform: scale(0.8);
+  pointer-events: none;
+  transition: opacity 0.3s ease, transform 0.3s ease;
 }
-@keyframes knobShimmer {
-  0%,60%  { left: -75%; }
-  80%     { left: 125%; }
-  100%    { left: 125%; }
+.stt-light .stt-ring { border-color: #FBBF24; }
+.stt-dark  .stt-ring { border-color: #7C3AED; }
+.stt-knob:hover .stt-ring {
+  opacity: 0.55;
+  transform: scale(1);
+  animation: sttRingPulse 1.8s ease-in-out infinite;
 }
-
-/* Dark mode: knob shifts down visually (sun is at top = light, moon at bottom = dark) */
-.tpb-knob.tpb-knob-dark {
-  background: #7C3AED;
-  box-shadow: 0 4px 16px rgba(124,58,237,0.4),
-              0 0 0 3px rgba(124,58,237,0.18);
-}
-
-/* Hover: knob pulses */
-.theme-pill-btn:hover .tpb-knob {
-  transform: scale(1.1);
+@keyframes sttRingPulse {
+  0%,100% { opacity: 0.55; transform: scale(1); }
+  50%      { opacity: 0.15; transform: scale(1.3); }
 }
 
-/* Label tooltip on hover */
-.theme-pill-fixed::after {
-  content: attr(data-tip);
+/* ── Shimmer sweep ── */
+.stt-shimmer {
   position: absolute;
-  right: calc(100% + 10px);
-  top: 50%;
-  transform: translateY(-50%);
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  color: var(--text-secondary);
-  font-size: 0.72rem;
-  font-weight: 600;
-  white-space: nowrap;
-  padding: 5px 10px;
-  border-radius: 8px;
-  box-shadow: 0 4px 16px var(--shadow);
+  inset: 0;
+  border-radius: 50%;
+  background: linear-gradient(
+    120deg,
+    transparent 25%,
+    rgba(255,255,255,0.28) 50%,
+    transparent 75%
+  );
+  background-size: 200% 200%;
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.2s ease;
 }
-.theme-pill-fixed:hover::after {
+.stt-knob:hover .stt-shimmer {
   opacity: 1;
+  animation: sttShimmer 1.4s ease-in-out infinite;
+}
+@keyframes sttShimmer {
+  0%   { background-position: -100% center; }
+  100% { background-position: 200% center; }
+}
+
+/* ── Tooltip ── */
+.stt-tooltip {
+  position: absolute;
+  right: calc(100% + 12px);
+  top: 50%;
+  transform: translateY(-50%) translateX(8px);
+  white-space: nowrap;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  padding: 5px 11px;
+  border-radius: 8px;
+  box-shadow: 0 4px 16px var(--shadow);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  z-index: 10;
+}
+.stt-knob:hover .stt-tooltip {
+  opacity: 1;
+  transform: translateY(-50%) translateX(0);
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .stt-wrap {
+    right: 8px;
+    --track-h: 130px;
+    --knob-d:  38px;
+  }
+}
+@media (max-width: 480px) {
+  .stt-wrap {
+    right: 4px;
+    --track-h: 110px;
+    --knob-d:  32px;
+  }
+  .stt-tooltip { display: none; }
 }
 
 /* ── CTA button ── */
