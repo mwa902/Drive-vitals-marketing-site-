@@ -41,20 +41,23 @@ mongoose.set("strictQuery", true);
 
 /* ── MongoDB — graceful, never crashes the server ── */
 let dbStatus = "disconnected";
+let dbError  = null;
 
 (async () => {
+  console.log("🔗 Connecting to MongoDB:", mongoUri.replace(/:([^@]+)@/, ":***@"));
   try {
     await mongoose.connect(mongoUri, {
-      serverSelectionTimeoutMS: 8000,  // give Atlas 8 s to respond
-      connectTimeoutMS: 10000,
+      serverSelectionTimeoutMS: 10000,
+      connectTimeoutMS: 12000,
     });
     dbStatus = "connected";
-    console.log("✅ MongoDB connected:", mongoUri.replace(/:([^@]+)@/, ":***@"));
+    dbError  = null;
+    console.log("✅ MongoDB connected successfully");
   } catch (err) {
     dbStatus = "error";
-    console.error("⚠️  MongoDB connection failed:", err.message);
-    console.error("    The server will keep running — DB-dependent routes will return 503.");
-    // NO process.exit() — let the HTTP server stay up so you can see the error
+    dbError  = err.message;
+    console.error("❌ MongoDB connection failed:", err.message);
+    console.error("   Fix: update MONGODB_URI in backend/.env with your real Atlas connection string");
   }
 })();
 
@@ -73,7 +76,9 @@ function requireDb(req, res, next) {
   if (dbStatus !== "connected") {
     return res.status(503).json({
       success: false,
-      message: "Database is temporarily unavailable. Please try again shortly.",
+      message: "Database is not connected. Check your MONGODB_URI in backend/.env",
+      detail: dbError || "Unknown connection error",
+      fix: "Visit cloud.mongodb.com, create a free M0 cluster, and paste the connection string into backend/.env as MONGODB_URI",
     });
   }
   next();
