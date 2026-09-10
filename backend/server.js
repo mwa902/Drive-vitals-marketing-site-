@@ -47,8 +47,9 @@ let dbError  = null;
   console.log("🔗 Connecting to MongoDB:", mongoUri.replace(/:([^@]+)@/, ":***@"));
   try {
     await mongoose.connect(mongoUri, {
-      serverSelectionTimeoutMS: 10000,
-      connectTimeoutMS: 12000,
+      serverSelectionTimeoutMS: 20000,
+      connectTimeoutMS: 25000,
+      socketTimeoutMS: 30000,
     });
     dbStatus = "connected";
     dbError  = null;
