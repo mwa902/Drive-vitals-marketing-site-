@@ -218,17 +218,19 @@ const teamMembers = [
     linkedin: '#',
     twitter: '#',
     skills: [['Strategy', 96], ['Operations', 92], ['Leadership', 98]],
-    tag: 'Visionary',
+    tag: 'Signal Pilot',
+    vibe: 'signal',
   },
   {
     name: 'Wahad Ahmad',
     role: 'CTO & Co-Founder',
     bio: 'Software engineer with a passion for scalable IoT systems and data platforms. Built infrastructure handling millions of data points daily.',
-    color: '#7C3AED',
+    color: '#F06B5F',
     linkedin: '#',
     twitter: '#',
     skills: [['Engineering', 99], ['IoT Systems', 95], ['Architecture', 97]],
-    tag: 'Builder',
+    tag: 'Glitch Builder',
+    vibe: 'glitch',
   },
   {
     name: 'Salman Rasool',
@@ -238,7 +240,8 @@ const teamMembers = [
     linkedin: '#',
     twitter: '#',
     skills: [['Product', 94], ['UX Research', 91], ['Roadmapping', 96]],
-    tag: 'Innovator',
+    tag: 'Orbit Maker',
+    vibe: 'orbit',
   },
 ];
 
@@ -494,7 +497,8 @@ export default function AboutUs() {
               return (
                 <div
                   key={i}
-                  className={`team-card-new reveal delay-${i + 1}`}
+                  className={`team-card-new team-card-${m.vibe} reveal delay-${i + 1}`}
+                  data-vibe={m.vibe}
                   style={{ '--mc': m.color }}
                 >
                   {/* Photo area */}

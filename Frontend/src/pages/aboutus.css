@@ -262,12 +262,60 @@
               0 0 0 1px var(--mc, var(--accent));
 }
 
+.team-card-signal { transform: rotate(-1.2deg); }
+.team-card-glitch { transform: translateY(12px) rotate(1.5deg); }
+.team-card-orbit { transform: rotate(-0.8deg); }
+.team-card-signal:hover,
+.team-card-orbit:hover { transform: translateY(-10px) rotate(0deg); }
+.team-card-glitch:hover { transform: translateY(2px) rotate(0deg); }
+
 /* ── Photo area ── */
 .tcn-photo {
   position: relative;
   height: 240px;
   overflow: hidden;
   background: #0a1628;
+}
+.tcn-photo::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.2;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent 0,
+    transparent 7px,
+    rgba(255,255,255,0.08) 8px,
+    transparent 9px
+  );
+  mix-blend-mode: screen;
+  animation: portraitScan 7s linear infinite;
+}
+@keyframes portraitScan {
+  from { transform: translateY(-18px); }
+  to { transform: translateY(18px); }
+}
+.team-card-glitch .team-portrait-svg {
+  filter: saturate(1.35) contrast(1.08) hue-rotate(-8deg);
+}
+.team-card-orbit .team-portrait-svg {
+  filter: saturate(1.2) contrast(1.04);
+}
+.team-card-glitch .tcn-photo::after,
+.team-card-orbit .tcn-photo::after {
+  content: '';
+  position: absolute;
+  inset: 14px;
+  border: 1px solid rgba(255,255,255,0.26);
+  pointer-events: none;
+  transform: skewX(-4deg);
+  animation: portraitFrame 4s ease-in-out infinite;
+}
+@keyframes portraitFrame {
+  0%, 100% { opacity: 0.2; transform: skewX(-4deg) scale(0.98); }
+  50% { opacity: 0.8; transform: skewX(4deg) scale(1); }
 }
 .team-portrait-svg {
   width: 100%;
