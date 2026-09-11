@@ -15,11 +15,14 @@ const transporter = nodemailer.createTransport({
     user: process.env.SMTP_USER,
     pass: process.env.SMTP_PASS,
   },
-  tls: {
-    ciphers: "SSLv3",
-    rejectUnauthorized: false, // required for some Office 365 tenants
-  },
+  requireTLS: process.env.SMTP_REQUIRE_TLS !== "false",
+  tls: { rejectUnauthorized: true },
 });
+
+export async function verifyMailer() {
+  await transporter.verify();
+  return true;
+}
 
 /**
  * sendMail(options)

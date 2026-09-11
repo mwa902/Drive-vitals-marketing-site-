@@ -6,6 +6,7 @@ import { fileURLToPath } from "url";
 import { dirname, join } from "path";
 import emailRoutes from "./routes/email.js";
 import demoRoutes from "./routes/demo.js";
+import { verifyMailer } from "./utils/mailer.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 dotenv.config({ path: join(__dirname, ".env") });
@@ -20,7 +21,7 @@ const allowedOrigins = [
   "http://localhost:3000",
   "http://localhost:4173",
   "http://localhost:5000",
-  // add your production domain here, e.g. "https://drivevital.com"
+  ...(process.env.FRONTEND_URLS || "").split(",").map((url) => url.trim()).filter(Boolean),
 ];
 
 app.use(
@@ -42,6 +43,8 @@ mongoose.set("strictQuery", true);
 /* ── MongoDB — graceful, never crashes the server ── */
 let dbStatus = "disconnected";
 let dbError  = null;
+let smtpStatus = "unknown";
+let smtpError = null;
 
 (async () => {
   console.log("🔗 Connecting to MongoDB:", mongoUri.replace(/:([^@]+)@/, ":***@"));
@@ -61,6 +64,17 @@ let dbError  = null;
     console.error("   Fix: update MONGODB_URI in backend/.env with your real Atlas connection string");
   }
 })();
+
+verifyMailer()
+  .then(() => {
+    smtpStatus = "connected";
+    console.log("✅ SMTP configuration verified");
+  })
+  .catch((err) => {
+    smtpStatus = "error";
+    smtpError = err.message;
+    console.error("❌ SMTP verification failed:", err.message);
+  });
 
 /* Reattach if connection drops after startup */
 mongoose.connection.on("disconnected", () => {
@@ -95,7 +109,13 @@ app.get("/", (_req, res) =>
 );
 
 app.get("/health", (_req, res) =>
-  res.json({ status: "ok", db: dbStatus, uptime: process.uptime() })
+  res.status(dbStatus === "connected" && smtpStatus !== "error" ? 200 : 503).json({
+    status: dbStatus === "connected" && smtpStatus !== "error" ? "ok" : "degraded",
+    db: dbStatus,
+    smtp: smtpStatus,
+    smtpError,
+    uptime: process.uptime(),
+  })
 );
 
 app.use("/api/email", requireDb, emailRoutes);

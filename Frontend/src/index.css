@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap');
 
 :root {
   --bg-primary: #ffffff;
@@ -10,6 +10,7 @@
   --accent: #1E6FFF;
   --accent-hover: #1558d6;
   --accent-light: #e8f0ff;
+  --accent-warm: #ffb547;
   --accent-glow: rgba(30, 111, 255, 0.25);
   --border: #e2e8f0;
   --border-light: #f0f4ff;
@@ -55,7 +56,7 @@ html {
 }
 
 body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
   background-color: var(--bg-primary);
   color: var(--text-primary);
   transition: background-color 0.35s ease, color 0.35s ease;
@@ -190,6 +191,7 @@ body {
 }
 
 .section-title {
+  font-family: 'Space Grotesk', sans-serif;
   font-size: clamp(2rem, 4vw, 2.8rem);
   font-weight: 800;
   color: var(--text-primary);
@@ -228,6 +230,19 @@ body {
   border-color: var(--accent);
 }
 
+button,
+a,
+input,
+select,
+textarea {
+  -webkit-tap-highlight-color: transparent;
+}
+
+:focus-visible {
+  outline: 3px solid var(--accent-warm);
+  outline-offset: 3px;
+}
+
 /* ══════════════════════════════════════
    SCROLL REVEAL SYSTEM
 ══════════════════════════════════════ */
@@ -257,6 +272,17 @@ body {
 .reveal-right.visible {
   opacity: 1;
   transform: translateX(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
 }
 .reveal-scale {
   opacity: 0;

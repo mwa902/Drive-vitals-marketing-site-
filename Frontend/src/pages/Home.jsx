@@ -232,15 +232,13 @@ const LIVE_EVENTS = [
 
 function LiveFeedPanel() {
   const [events, setEvents] = useState(LIVE_EVENTS.slice(0, 5));
-  const [tick, setTick]     = useState(0);
   const [stats, setStats]   = useState({ active: 124, saved: 18, ontime: 97 });
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setTick(t => t + 1);
       // rotate in a new event at top
       setEvents(prev => {
-        const next = LIVE_EVENTS[(tick + 5) % LIVE_EVENTS.length];
+        const next = LIVE_EVENTS[Math.floor(Math.random() * LIVE_EVENTS.length)];
         return [{ ...next, time: 'just now', _new: true }, ...prev.slice(0, 4)];
       });
       // jitter stats slightly
@@ -251,7 +249,7 @@ function LiveFeedPanel() {
       }));
     }, 2800);
     return () => clearInterval(interval);
-  }, [tick]);
+  }, []);
 
   const dotColor = { success: '#22C55E', warn: '#F59E0B', info: '#1E6FFF' };
 
@@ -876,9 +874,6 @@ function ApproachSection() {
     { idx: 5, r: 192, speed: 20 },
   ];
 
-  // Evenly space pairs on each ring (180° apart)
-  const startAngles = { 80: 60, 138: 130, 192: 200 };
-
   return (
     <section id="approach" className="section approach-section">
       <div className="container">
@@ -928,8 +923,6 @@ function ApproachSection() {
                 const a = approaches[n.idx];
                 // pair on same ring start 180° apart
                 const pairIndex = nodes.filter(x => x.r === n.r).indexOf(n);
-                const startDeg = (startAngles[n.r] || 0) + pairIndex * 180;
-                const animName = `orb${n.idx}`;
                 const dir = n.r === 138 ? 'reverse' : 'normal';
                 return (
                   <div
