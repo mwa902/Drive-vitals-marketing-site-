@@ -455,7 +455,7 @@ function HowItWorksSection() {
   ];
 
   return (
-    <section id="how-it-works" className="section">
+    <section id="how-it-works" className="section hiw-section">
       <div className="container">
         <div className="hiw-layout">
           <div className="section-header reveal-left">
@@ -1041,7 +1041,7 @@ function PricingSection() {
   ];
 
   return (
-    <section id="pricing" className="section">
+    <section id="pricing" className="section pricing-section">
       <div className="container">
         <div className="section-header center reveal">
           <div className="section-badge">
@@ -1051,7 +1051,7 @@ function PricingSection() {
             </svg>
             Transparent Pricing
           </div>
-          <h2 className="section-title">Simple pricing,<br /><span>no surprises</span></h2>
+          <h2 className="section-title">Choose your fleet's<br /><span>next gear</span></h2>
           <p className="section-subtitle" style={{ margin: '0 auto' }}>
             Every plan includes a 14-day free trial. No credit card required. Cancel any time.
           </p>
@@ -1064,6 +1064,7 @@ function PricingSection() {
               className={`pricing-card card reveal delay-${i + 1}${p.popular ? ' pricing-popular' : ''}`}
             >
               {p.popular && <div className="popular-badge">Most Popular</div>}
+              <div className="plan-kicker">{p.popular ? 'For growing teams' : p.name === 'Enterprise' ? 'For complex operations' : 'For lean fleets'}</div>
               <div className="plan-name">{p.name}</div>
               <div className="plan-price">
                 <span className="price-amount">{p.price}</span>
@@ -1084,7 +1085,7 @@ function PricingSection() {
               <a
                 href="#contact"
                 className={p.popular ? 'btn-primary' : 'btn-outline'}
-                style={{ width: '100%', justifyContent: 'center', marginTop: 'auto', paddingTop: '24px', display: 'inline-flex' }}
+                style={{ width: '100%', justifyContent: 'center', marginTop: 'auto', padding: '14px 20px', display: 'inline-flex' }}
                 onClick={e => { e.preventDefault(); document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' }); }}
               >
                 {p.cta}
@@ -1158,7 +1159,7 @@ function TestimonialsSection() {
   const [hovered, setHovered] = useState(false);
 
   return (
-    <section className="testi-section">
+    <section id="customer-stories" className="testi-section">
       <div className="container">
         <div className="section-header center reveal" style={{ marginBottom: '56px' }}>
           <div className="section-badge">
@@ -1172,6 +1173,37 @@ function TestimonialsSection() {
             Real results from real fleets across Pakistan and beyond.
           </p>
         </div>
+      </div>
+
+      <div className="container">
+        <article className="testi-featured reveal">
+          <div className="testi-featured-copy">
+            <div className="testi-featured-label">
+              <span className="testi-featured-dot" />
+              Featured fleet story
+            </div>
+            <blockquote>
+              “We reduced fuel costs by 22% in the first three months and moved our
+              on-time delivery rate from 87% to 97%.”
+            </blockquote>
+            <div className="testi-featured-person">
+              <div className="testi-avatar" style={{ background: 'linear-gradient(135deg, #1E6FFF, #73adff)' }}>HA</div>
+              <div>
+                <strong>Hamza Akmal</strong>
+                <span>Fleet Director, Pakistan Logistic Co.</span>
+              </div>
+            </div>
+          </div>
+          <div className="testi-featured-results">
+            <span className="testi-results-eyebrow">Impact after 90 days</span>
+            <div className="testi-result-main">22<span>%</span></div>
+            <span className="testi-result-label">fuel cost reduction</span>
+            <div className="testi-result-bars">
+              <div><span>Before DriveVital</span><i style={{ '--bar-width': '58%' }} /></div>
+              <div><span>With DriveVital</span><i style={{ '--bar-width': '92%' }} /></div>
+            </div>
+          </div>
+        </article>
       </div>
 
       {/* Infinite marquee — full width, no container constraint */}
