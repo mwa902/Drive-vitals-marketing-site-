@@ -97,6 +97,10 @@ function HeroSection() {
 
         {/* Dashboard mockup */}
         <div className="hero-visual">
+          <div className="hero-float-card hero-float-card-top">
+            <span className="hero-float-value">98.7%</span>
+            <span className="hero-float-label">route accuracy</span>
+          </div>
           <div className="dashboard-mockup">
             <div className="mockup-header">
               <div className="mockup-dots"><span/><span/><span/></div>
@@ -160,6 +164,10 @@ function HeroSection() {
                 ))}
               </div>
             </div>
+          </div>
+          <div className="hero-float-card hero-float-card-bottom">
+            <span className="hero-float-pulse" />
+            <span><strong>Fleet pulse</strong><small>All systems moving</small></span>
           </div>
         </div>
       </div>
