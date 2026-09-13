@@ -2,18 +2,14 @@ import nodemailer from "nodemailer";
 import dotenv from "dotenv";
 dotenv.config();
 
-/**
- * Reusable nodemailer transporter
- * Uses Microsoft 365 SMTP (smtp.office365.com:587 + STARTTLS)
- * which is what UOL student accounts run on.
- */
+
 const transporter = nodemailer.createTransport({
   host:   process.env.SMTP_HOST   || "smtp.office365.com",
   port:   Number(process.env.SMTP_PORT)  || 587,
-  secure: process.env.SMTP_SECURE === "true", // false → STARTTLS on 587
+  secure: process.env.SMTP_SECURE === "true", 
   auth: {
     user: process.env.SMTP_USER,
-    pass: process.env.SMTP_PASS,
+    pass: process.env.SMTP_PASS?.replace(/\s+/g, ""),
   },
   requireTLS: process.env.SMTP_REQUIRE_TLS !== "false",
   tls: { rejectUnauthorized: true },
