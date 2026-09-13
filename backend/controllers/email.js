@@ -1,24 +1,18 @@
 import Email from "../models/email.js";
 import { sendMail } from "../utils/mailer.js";
+import { validateContactInput } from "../utils/validation.js";
 
 export const createEmail = async (req, res) => {
   try {
-    const {
-      fullname,
-      email,
-      company,
-      phonenumber,
-      fleetsize,
-      inquirytype,
-      message,
-    } = req.body;
-
-    if (!fullname || !email || !company || !phonenumber || !inquirytype || !message) {
+    const validation = validateContactInput(req.body);
+    if (validation.errors.length) {
       return res.status(400).json({
         success: false,
-        message: "Please fill all required fields.",
+        message: validation.errors[0],
+        errors: validation.errors,
       });
     }
+    const { fullname, email, company, phonenumber, fleetsize, inquirytype, message } = validation.value;
 
     /* ── 1. Save to MongoDB ── */
     const newEmail = new Email({

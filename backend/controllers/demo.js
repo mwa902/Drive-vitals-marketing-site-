@@ -1,16 +1,18 @@
 import Demo from "../models/demo.js";
 import { sendMail } from "../utils/mailer.js";
+import { validateDemoInput } from "../utils/validation.js";
 
 export const createDemo = async (req, res) => {
   try {
-    const { company, phonenumber, email, description } = req.body;
-
-    if (!company || !phonenumber || !email || !description) {
+    const validation = validateDemoInput(req.body);
+    if (validation.errors.length) {
       return res.status(400).json({
         success: false,
-        message: "Please fill all required fields.",
+        message: validation.errors[0],
+        errors: validation.errors,
       });
     }
+    const { company, phonenumber, email, description } = validation.value;
 
     /* ── 1. Save to MongoDB ── */
     const demo = new Demo({ company, phonenumber, email, description });
