@@ -439,6 +439,75 @@
   z-index: 1;
   animation: fadeIn 1s 1.5s ease both;
 }
+
+/* Logistics demo video */
+.logistics-video-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: rgba(3, 11, 20, 0.82);
+  backdrop-filter: blur(12px);
+  animation: fadeIn 0.25s ease both;
+}
+
+.logistics-video-modal {
+  width: min(900px, 100%);
+  overflow: hidden;
+  background: #0b1b2e;
+  border: 1px solid rgba(142, 231, 194, 0.26);
+  border-radius: 18px;
+  box-shadow: 0 30px 90px rgba(0, 0, 0, 0.55);
+  animation: modalRise 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.logistics-video-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 24px 28px;
+}
+
+.logistics-video-kicker {
+  display: block;
+  margin-bottom: 8px;
+  color: #8ee7c2;
+  font: 600 0.68rem 'DM Sans', sans-serif;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+
+.logistics-video-header h2 {
+  color: #fff;
+  font: 700 clamp(1.35rem, 3vw, 2rem) / 1.15 'Space Grotesk', sans-serif;
+}
+
+.logistics-video-close {
+  width: 38px;
+  height: 38px;
+  flex: 0 0 auto;
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 50%;
+  background: rgba(255,255,255,0.06);
+  color: #fff;
+  cursor: pointer;
+  font-size: 1.6rem;
+  line-height: 1;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.logistics-video-close:hover { background: rgba(255,255,255,0.16); transform: rotate(90deg); }
+.logistics-video { display: block; width: 100%; max-height: min(68vh, 540px); background: #000; object-fit: cover; }
+
+@keyframes modalRise { from { opacity: 0; transform: translateY(18px) scale(0.97); } to { opacity: 1; transform: translateY(0) scale(1); } }
+
+@media (max-width: 600px) {
+  .logistics-video-backdrop { padding: 12px; }
+  .logistics-video-header { padding: 18px; }
+}
 @keyframes fadeIn {
   from { opacity: 0; }
   to   { opacity: 1; }

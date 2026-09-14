@@ -31,6 +31,8 @@ function useScrollReveal() {
    HERO SECTION
 ══════════════════════════════════════ */
 function HeroSection() {
+  const [showVideo, setShowVideo] = useState(false);
+
   return (
     <section id="home" className="hero-section">
       <div className="hero-bg">
@@ -71,9 +73,9 @@ function HeroSection() {
               </svg>
             </a>
             <a
-              href="#how-it-works"
+              href="#logistics-demo"
               className="btn-ghost"
-              onClick={e => { e.preventDefault(); document.querySelector('#how-it-works')?.scrollIntoView({ behavior: 'smooth' }); }}
+              onClick={e => { e.preventDefault(); setShowVideo(true); }}
             >
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <circle cx="12" cy="12" r="10"/>
@@ -176,6 +178,24 @@ function HeroSection() {
         <div className="scroll-mouse"><div className="scroll-wheel" /></div>
         <span>Scroll to explore</span>
       </div>
+
+      {showVideo && (
+        <div className="logistics-video-backdrop" role="presentation" onClick={() => setShowVideo(false)}>
+          <div className="logistics-video-modal" role="dialog" aria-modal="true" aria-labelledby="logistics-video-title" onClick={e => e.stopPropagation()}>
+            <div className="logistics-video-header">
+              <div>
+                <span className="logistics-video-kicker">DriveVital logistics overview</span>
+                <h2 id="logistics-video-title">See every delivery move clearly.</h2>
+              </div>
+              <button type="button" className="logistics-video-close" onClick={() => setShowVideo(false)} aria-label="Close video">×</button>
+            </div>
+            <video className="logistics-video" controls autoPlay playsInline poster="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=1400&q=85">
+              <source src="https://cdn.coverr.co/videos/coverr-a-truck-on-the-road-1572/1080p.mp4" type="video/mp4" />
+              Your browser does not support embedded video.
+            </video>
+          </div>
+        </div>
+      )}
     </section>
   );
 }
