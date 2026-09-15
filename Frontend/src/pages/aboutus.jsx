@@ -483,7 +483,7 @@ export default function AboutUs() {
               The Team
             </div>
             <h2 className="section-title">
-              The people behind<br /><span>DriveVital</span>
+              The team behind<br /><span>DriveVital</span>
             </h2>
             <p className="section-subtitle" style={{ margin: '0 auto' }}>
               A diverse team of engineers, operators, and customer advocates united by
