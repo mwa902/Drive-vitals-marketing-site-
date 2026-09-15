@@ -28,13 +28,27 @@ function PortraitHaris() {
           <stop offset="0%" stopColor="#1E3A8A" />
           <stop offset="100%" stopColor="#0F172A" />
         </linearGradient>
+        <linearGradient id="harisSkin" x1="0" x2="1" y1="0" y2="1">
+          <stop offset="0%" stopColor="#FFF8EF" />
+          <stop offset="58%" stopColor="#F1D2B7" />
+          <stop offset="100%" stopColor="#D6A184" />
+        </linearGradient>
       </defs>
       <rect width="200" height="240" fill="url(#harisBg)" />
+      <g transform="translate(30 68) scale(0.7)">
       <path d="M32 220C48 196 67 185 100 185C133 185 152 196 168 220V240H32V220Z" fill="#1F2937"/>
       <path d="M74 188H126L116 156H84L74 188Z" fill="#F8FAFC"/>
       <path d="M90 155H110V188H90V155Z" fill="#F5F5F5"/>
-      <ellipse cx="100" cy="118" rx="38" ry="42" fill="#F2D1AE"/>
+      <ellipse cx="65" cy="119" rx="5" ry="10" fill="#E0B397"/>
+      <ellipse cx="135" cy="119" rx="5" ry="10" fill="#E0B397"/>
+      <ellipse cx="100" cy="118" rx="38" ry="42" fill="url(#harisSkin)"/>
       <path d="M62 112C62 74 78 58 100 58C122 58 138 74 138 112C134 90 120 80 100 80C80 80 66 90 62 112Z" fill="#1A120D"/>
+      <path d="M67 91C70 70 83 57 100 57C117 57 130 70 133 91C126 78 115 71 100 71C85 71 74 78 67 91Z" fill="#39261D" opacity="0.8"/>
+      <g fill="#4A3025">
+        <circle cx="70" cy="78" r="7"/><circle cx="81" cy="66" r="8"/><circle cx="94" cy="61" r="8"/>
+        <circle cx="108" cy="61" r="8"/><circle cx="121" cy="67" r="8"/><circle cx="131" cy="80" r="7"/>
+      </g>
+      <path d="M74 83C82 70 91 66 100 66C109 66 118 70 126 83" stroke="#8B604A" strokeWidth="2" strokeLinecap="round" opacity="0.65"/>
       <path d="M66 111C68 93 81 82 100 82C119 82 132 93 134 111C125 98 112 92 100 92C88 92 75 98 66 111Z" fill="#221510" opacity="0.9"/>
       <path d="M72 111C77 109 83 108 88 109" stroke="#1A120D" strokeWidth="2.6" strokeLinecap="round"/>
       <path d="M112 109C117 108 123 109 128 111" stroke="#1A120D" strokeWidth="2.6" strokeLinecap="round"/>
@@ -47,11 +61,17 @@ function PortraitHaris() {
       <circle cx="114" cy="116" r="4.5" fill="#1B120D"/>
       <circle cx="87.5" cy="114.5" r="1.4" fill="#fff"/>
       <circle cx="115.5" cy="114.5" r="1.4" fill="#fff"/>
+      <ellipse cx="91" cy="116" rx="2" ry="1" fill="#FFF5E9" opacity="0.8"/>
+      <ellipse cx="119" cy="116" rx="2" ry="1" fill="#FFF5E9" opacity="0.8"/>
       <path d="M95 120C96 126 98 128 100 130C102 128 104 126 105 120" stroke="#9C5A38" strokeWidth="1.8" fill="none"/>
+      <ellipse cx="79" cy="130" rx="7" ry="3" fill="#EFAE9D" opacity="0.24"/>
+      <ellipse cx="121" cy="130" rx="7" ry="3" fill="#EFAE9D" opacity="0.24"/>
       <path d="M82 134C90 140 95 143 100 143C105 143 110 140 118 134" stroke="#7A3B1C" strokeWidth="2.3" strokeLinecap="round"/>
+      <path d="M83 133C88 141 93 145 100 145C107 145 112 141 117 133" stroke="#5A2B1A" strokeWidth="1.2" opacity="0.5"/>
       <path d="M80 129C86 138 92 142 100 142C108 142 114 138 120 129" stroke="#8E4F2B" strokeWidth="2" strokeLinecap="round" opacity="0.8"/>
       <path d="M84 141C90 146 95 148 100 148C105 148 110 146 116 141" stroke="#2F180E" strokeWidth="3" strokeLinecap="round" fill="none"/>
       <path d="M88 139C90 144 95 146 100 146C105 146 110 144 112 139" stroke="#4F2B15" strokeWidth="1.5" fill="none" opacity="0.9"/>
+      </g>
     </svg>
   );
 }
@@ -64,13 +84,23 @@ function PortraitWahad() {
           <stop offset="0%" stopColor="#312E81" />
           <stop offset="100%" stopColor="#111827" />
         </linearGradient>
+        <linearGradient id="wahadSkin" x1="0" x2="1" y1="0" y2="1">
+          <stop offset="0%" stopColor="#FFF9F0" />
+          <stop offset="58%" stopColor="#F2D4BB" />
+          <stop offset="100%" stopColor="#D6A286" />
+        </linearGradient>
       </defs>
       <rect width="200" height="240" fill="url(#wahadBg)" />
+      <g transform="translate(30 68) scale(0.7)">
       <path d="M30 220C48 195 68 185 100 185C132 185 152 195 170 220V240H30V220Z" fill="#1F2937"/>
-      <path d="M82 187H118V208H82V187Z" fill="#F2D1AE"/>
-      <ellipse cx="100" cy="118" rx="36" ry="40" fill="#F1D1AF"/>
+      <path d="M82 187H118V208H82V187Z" fill="#E1B499"/>
+      <ellipse cx="66" cy="119" rx="5" ry="10" fill="#E0B397"/>
+      <ellipse cx="134" cy="119" rx="5" ry="10" fill="#E0B397"/>
+      <ellipse cx="100" cy="118" rx="36" ry="40" fill="url(#wahadSkin)"/>
       <path d="M64 111C64 78 81 60 100 60C119 60 136 78 136 111C131 93 118 82 100 82C82 82 69 93 64 111Z" fill="#0F172A"/>
       <path d="M68 108C72 88 85 76 100 76C115 76 128 88 132 108" stroke="#1F2937" strokeWidth="3" strokeLinecap="round"/>
+      <path d="M72 87C79 69 88 62 100 62C112 62 121 69 128 87" stroke="#374151" strokeWidth="2" opacity="0.8"/>
+      <path d="M70 83C77 69 87 63 100 63C113 63 123 69 130 83" stroke="#9CA3AF" strokeWidth="1.6" opacity="0.45"/>
       <rect x="71" y="111" width="20" height="13" rx="4" fill="none" stroke="#1F2937" strokeWidth="2"/>
       <rect x="109" y="111" width="20" height="13" rx="4" fill="none" stroke="#1F2937" strokeWidth="2"/>
       <line x1="91" y1="117" x2="109" y2="117" stroke="#1F2937" strokeWidth="2"/>
@@ -78,12 +108,18 @@ function PortraitWahad() {
       <circle cx="115" cy="117" r="4" fill="#191919"/>
       <circle cx="86.5" cy="115.5" r="1.3" fill="#fff"/>
       <circle cx="116.5" cy="115.5" r="1.3" fill="#fff"/>
+      <ellipse cx="89" cy="116" rx="2" ry="1" fill="#FFF7ED" opacity="0.8"/>
+      <ellipse cx="119" cy="116" rx="2" ry="1" fill="#FFF7ED" opacity="0.8"/>
       <path d="M84 103C87 101 90 101 93 103" stroke="#1F2937" strokeWidth="2.4" strokeLinecap="round"/>
       <path d="M107 103C110 101 113 101 116 103" stroke="#1F2937" strokeWidth="2.4" strokeLinecap="round"/>
       <path d="M95 122C96 127 98 130 100 132C102 130 104 127 105 122" stroke="#9C5A38" strokeWidth="1.8" fill="none"/>
+      <ellipse cx="78" cy="130" rx="6" ry="3" fill="#EFAE9D" opacity="0.2"/>
+      <ellipse cx="122" cy="130" rx="6" ry="3" fill="#EFAE9D" opacity="0.2"/>
       <path d="M87 140C92 143 96 144 100 144C104 144 108 143 113 140" stroke="#7A3B1C" strokeWidth="2.2" strokeLinecap="round"/>
       <path d="M85 136C92 145 96 148 100 148C104 148 108 145 115 136" stroke="#4B2E2A" strokeWidth="3" strokeLinecap="round" fill="none"/>
+      <path d="M88 138C92 146 96 150 100 150C104 150 108 146 112 138" stroke="#2D1A19" strokeWidth="1.2" opacity="0.65"/>
       <path d="M88 132C92 135 96 136 100 136C104 136 108 135 112 132" stroke="#000" strokeWidth="1.5" opacity="0.35"/>
+      </g>
     </svg>
   );
 }
@@ -96,23 +132,38 @@ function PortraitSalman() {
           <stop offset="0%" stopColor="#14532D" />
           <stop offset="100%" stopColor="#0F172A" />
         </linearGradient>
+        <linearGradient id="salmanSkin" x1="0" x2="1" y1="0" y2="1">
+          <stop offset="0%" stopColor="#FFF9F1" />
+          <stop offset="58%" stopColor="#F3D5BB" />
+          <stop offset="100%" stopColor="#D8A487" />
+        </linearGradient>
       </defs>
       <rect width="200" height="240" fill="url(#salmanBg)" />
+      <g transform="translate(30 68) scale(0.7)">
       <path d="M30 220C48 196 67 185 100 185C133 185 152 196 170 220V240H30V220Z" fill="#1F2937"/>
       <path d="M80 186H120L110 157H90L80 186Z" fill="#F8FAFC"/>
-      <ellipse cx="100" cy="117" rx="36" ry="40" fill="#F1D1AF"/>
+      <ellipse cx="66" cy="118" rx="5" ry="10" fill="#E0B397"/>
+      <ellipse cx="134" cy="118" rx="5" ry="10" fill="#E0B397"/>
+      <ellipse cx="100" cy="117" rx="36" ry="40" fill="url(#salmanSkin)"/>
       <path d="M64 106C64 75 79 60 100 60C121 60 136 75 136 106C131 90 120 80 100 80C80 80 69 90 64 106Z" fill="#1C1917"/>
       <path d="M66 108C71 90 83 79 100 79C117 79 129 90 134 108" stroke="#221A16" strokeWidth="3" strokeLinecap="round"/>
+      <path d="M72 82C78 68 88 61 100 61C112 61 122 68 128 82" stroke="#3B2B24" strokeWidth="2" opacity="0.8"/>
+      <path d="M67 91C72 74 83 66 100 65C117 66 128 74 133 91" stroke="#6B5145" strokeWidth="2" strokeLinecap="round" opacity="0.55"/>
       <circle cx="86" cy="118" r="4" fill="#191919"/>
       <circle cx="114" cy="118" r="4" fill="#191919"/>
       <circle cx="87.5" cy="116.5" r="1.3" fill="#fff"/>
       <circle cx="115.5" cy="116.5" r="1.3" fill="#fff"/>
+      <ellipse cx="89" cy="117" rx="2" ry="1" fill="#FFF7ED" opacity="0.8"/>
+      <ellipse cx="119" cy="117" rx="2" ry="1" fill="#FFF7ED" opacity="0.8"/>
       <path d="M80 104C84 101 88 101 92 103" stroke="#1C1917" strokeWidth="2.5" strokeLinecap="round"/>
       <path d="M108 103C112 101 116 101 120 104" stroke="#1C1917" strokeWidth="2.5" strokeLinecap="round"/>
       <path d="M96 123C97 128 99 130 100 132C101 130 103 128 104 123" stroke="#9C5A38" strokeWidth="1.8" fill="none"/>
+      <ellipse cx="78" cy="130" rx="6" ry="3" fill="#EFAE9D" opacity="0.2"/>
+      <ellipse cx="122" cy="130" rx="6" ry="3" fill="#EFAE9D" opacity="0.2"/>
       <path d="M88 139C94 143 97 145 100 145C103 145 106 143 112 139" stroke="#7A3B1C" strokeWidth="2.2" strokeLinecap="round"/>
       <path d="M84 134C88 141 94 145 100 145C106 145 112 141 116 134" stroke="#9A5B38" strokeWidth="1.5" opacity="0.8"/>
       <path d="M90 132C94 136 97 138 100 138C103 138 106 136 110 132" stroke="#221A16" strokeWidth="1.4" opacity="0.35"/>
+      </g>
     </svg>
   );
 }
