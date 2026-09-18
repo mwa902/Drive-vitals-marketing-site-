@@ -236,7 +236,7 @@ const values = [
       </svg>
     ),
     title: 'Reliability',
-    desc: 'Fleet operations never stop, so neither do we. Our 99.9% uptime SLA means you can always count on us.',
+    desc: 'Fleet operations are demanding, so we focus on clear communication, dependable setup, and responsive human support.',
   },
   {
     icon: (
@@ -246,7 +246,7 @@ const values = [
       </svg>
     ),
     title: 'Security & Trust',
-    desc: 'We are SOC 2 Type II certified, GDPR compliant, and treat your fleet data with the highest security standards.',
+    desc: 'We handle operational data thoughtfully and work with customers to establish sensible access and data-handling practices.',
   },
   {
     icon: (
@@ -303,9 +303,9 @@ export default function AboutUs() {
             </p>
             <div className="about-hero-stats reveal delay-3">
               {[
-                { value: '2,000+', label: 'Customers' },
-                { value: '150K+',  label: 'Vehicles' },
-                { value: '99.9%',  label: 'Uptime' },
+                { value: '2026',   label: 'Founded in Lahore' },
+                { value: '1 view', label: 'For your daily operations' },
+                { value: 'Local',  label: 'Hands-on support' },
               ].map(s => (
                 <div key={s.label} className="about-hero-stat">
                   <span className="about-hero-stat-value">{s.value}</span>
@@ -343,8 +343,8 @@ export default function AboutUs() {
                 decisions in real time.
               </p>
               <p>
-                Today, DriveVital serves over 2,000 businesses across Pakistan — from
-                single-van startups to 1,000-vehicle enterprise fleets.
+                Today, DriveVital is working with growing Pakistani businesses to turn
+                disconnected fleet data into a clearer daily operating picture.
               </p>
             </div>
 

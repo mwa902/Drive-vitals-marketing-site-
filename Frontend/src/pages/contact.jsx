@@ -521,9 +521,9 @@ export default function Contact() {
                   Support Hours
                 </h3>
                 <div className="hours-grid">
-                  <div className="hours-item"><span>Enterprise</span><span className="hours-value">24/7</span></div>
-                  <div className="hours-item"><span>Professional</span><span className="hours-value">24/7</span></div>
-                  <div className="hours-item"><span>Starter</span><span className="hours-value">Mon–Fri 9–5</span></div>
+                  <div className="hours-item"><span>Demo calls</span><span className="hours-value">By appointment</span></div>
+                  <div className="hours-item"><span>Email enquiries</span><span className="hours-value">Within 1 business day</span></div>
+                  <div className="hours-item"><span>Phone support</span><span className="hours-value">Mon–Sat 9–7 PKT</span></div>
                 </div>
               </div>
 
@@ -533,10 +533,10 @@ export default function Contact() {
                     <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
                     <polyline points="9 12 11 14 15 10"/>
                   </svg>
-                  Trusted Worldwide
+                  What you can expect
                 </h3>
                 <div className="trust-grid">
-                  {['2,000+ customers', '30+ countries', '150K+ vehicles', '99.9% uptime'].map(t => (
+                  {['A clear fleet assessment', 'A tailored walkthrough', 'Practical rollout advice', 'Local human support'].map(t => (
                     <div key={t} className="trust-tag">
                       <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" strokeWidth="3">
                         <polyline points="20 6 9 17 4 12"/>
