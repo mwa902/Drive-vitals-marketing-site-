@@ -46,19 +46,18 @@ function HeroSection() {
         <div className="hero-content">
           <div className="hero-badge">
             <span className="badge-dot" />
-            Trusted by 2,000+ Fleet Operators
+            Built for growing fleets in Pakistan
           </div>
 
           <h1 className="hero-title">
-            Manage Your Fleet<br />
-            <span className="hero-title-accent">Smarter, Faster,</span><br />
-            More Profitably
+            Know where your fleet is.<br />
+            <span className="hero-title-accent">Run every day better.</span>
           </h1>
 
           <p className="hero-subtitle">
-            DriveVital is the all-in-one fleet management platform that helps you track
-            vehicles in real time, reduce fuel costs, schedule maintenance, and keep every
-            driver safe — all from one powerful dashboard.
+            DriveVital helps delivery teams, field-service businesses, and transport
+            operators turn vehicle data into fewer delays, lower fuel waste, and better
+            customer updates.
           </p>
 
           <div className="hero-actions">
@@ -67,7 +66,7 @@ function HeroSection() {
               className="btn-primary"
               onClick={e => { e.preventDefault(); document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' }); }}
             >
-              Start Free Trial
+              Book a fleet consultation
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                 <path d="M5 12h14M12 5l7 7-7 7"/>
               </svg>
@@ -86,7 +85,7 @@ function HeroSection() {
           </div>
 
           <div className="hero-trust">
-            {['No credit card required', 'Free 14-day trial', '24/7 support'].map(t => (
+            {['Personalised walkthrough', 'Practical rollout plan', 'Local support'].map(t => (
               <div key={t} className="trust-item">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#22C55E" strokeWidth="3">
                   <polyline points="20 6 9 17 4 12"/>
@@ -206,23 +205,23 @@ function HeroSection() {
 function StatsBanner() {
   const stats = [
     {
-      value: '2,000+',
-      label: 'Businesses Worldwide',
+      value: '1 view',
+      label: 'For your whole fleet',
       icon: <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>,
     },
     {
-      value: '150K+',
-      label: 'Vehicles Tracked Daily',
+      value: 'Real time',
+      label: 'Vehicle visibility',
       icon: <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="1" y="3" width="15" height="13" rx="1"/><path d="M16 8h4l3 3v4h-7V8zM5.5 20a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zm13 0a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/></svg>,
     },
     {
-      value: '99.9%',
-      label: 'Platform Uptime',
+      value: 'Less waste',
+      label: 'Smarter routes and fuel use',
       icon: <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>,
     },
     {
-      value: 'Rs 11.6M',
-      label: 'Fuel Costs Saved',
+      value: '1 partner',
+      label: 'For setup and support',
       icon: <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>,
     },
   ];
@@ -876,7 +875,7 @@ function ApproachSection() {
     {
       icon: (<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>),
       title: 'Monitor', color: '#0891B2',
-      desc: 'Real-time dashboards give you full visibility — every vehicle, every driver, every route, live 24/7.',
+      desc: 'Real-time dashboards give you full visibility — every vehicle, every driver, every route, in one place.',
     },
     {
       icon: (<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm0 0v10l4.5 4.5"/></svg>),
@@ -1033,27 +1032,27 @@ function PricingSection() {
   const plans = [
     {
       name: 'Starter',
-      price: 'Rs 24,999',
-      period: '/month',
-      desc: 'Perfect for small fleets getting started with telematics.',
+      price: 'Custom quote',
+      period: '',
+      desc: 'A focused starting point for small fleets that need visibility and control.',
       features: ['Up to 10 vehicles', 'Real-time Monitoring System', 'Basic driver scoring', 'Email alerts', 'Standard reports', '8/5 email support'],
-      cta: 'Start Free Trial',
+      cta: 'Discuss your fleet',
       popular: false,
     },
     {
       name: 'Professional',
-      price: 'Rs 74,999',
-      period: '/month',
-      desc: 'The most popular plan for growing fleet businesses.',
-      features: ['Up to 50 vehicles', 'Everything in Starter', 'Weekly Report Generation', 'Maintenance alert', 'Fuel management', 'Advanced analytics', '24/7 priority support', 'API access'],
-      cta: 'Start Free Trial',
+      price: 'Custom quote',
+      period: '',
+      desc: 'A connected operating view for growing delivery and field-service teams.',
+      features: ['Up to 50 vehicles', 'Everything in Starter', 'Weekly report generation', 'Maintenance alerts', 'Fuel management', 'Advanced analytics', 'Priority support', 'API access'],
+      cta: 'Discuss your fleet',
       popular: true,
     },
     {
       name: 'Enterprise',
-      price: 'Custom',
+      price: 'Tailored plan',
       period: '',
-      desc: 'Tailored solutions for large fleets with complex requirements.',
+      desc: 'A practical implementation plan for complex or multi-site operations.',
       features: ['Unlimited vehicles', 'Everything in Pro', 'Custom integrations', 'Dedicated account manager', 'On-site training', 'SLA guarantee', 'White-label options', 'Custom reporting'],
       cta: 'Contact Sales',
       popular: false,
@@ -1069,11 +1068,12 @@ function PricingSection() {
               <line x1="12" y1="1" x2="12" y2="23"/>
               <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
             </svg>
-            Transparent Pricing
+            Straightforward planning
           </div>
           <h2 className="section-title">Choose your fleet's<br /><span>next gear</span></h2>
           <p className="section-subtitle" style={{ margin: '0 auto' }}>
-            Every plan includes a 14-day free trial. No credit card required. Cancel any time.
+            Fleet needs vary. We will understand your operation first, then recommend the right
+            setup, rollout, and support model.
           </p>
         </div>
 
@@ -1119,12 +1119,12 @@ function PricingSection() {
 }
 
 /* ══════════════════════════════════════
-   TESTIMONIALS
+  CUSTOMER STORIES
 ══════════════════════════════════════ */
 /* ══════════════════════════════════════
    TESTIMONIALS — infinite marquee + ticker
 ══════════════════════════════════════ */
-function TestimonialsSection() {
+export function TestimonialsSection() {
   const testimonials = [
     {
       name: 'Hamza Akmal',
@@ -1296,9 +1296,7 @@ function TestimonialsSection() {
   );
 }
 
-/* ══════════════════════════════════════
-   ROOT EXPORT
-══════════════════════════════════════ */
+
 export default function Home() {
   useScrollReveal();
 
@@ -1311,7 +1309,6 @@ export default function Home() {
       <SolutionsSection />
       <ApproachSection />
       <PricingSection />
-      <TestimonialsSection />
     </>
   );
 }
