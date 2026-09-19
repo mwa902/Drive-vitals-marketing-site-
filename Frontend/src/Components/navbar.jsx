@@ -11,26 +11,22 @@ import LogoSVG from './LogoSVG';
    The knob physically rides the vertical scroll track.
 ══════════════════════════════════════════════════ */
 function ScrollThemeToggle({ theme, toggleTheme }) {
-  const [progress,  setProgress]  = useState(0);
   const [spinning,  setSpinning]  = useState(false);
   const [hovered,   setHovered]   = useState(false);
-
-  const TRACK_H = 160;
-  const KNOB_H  = 44;
 
   /* live scroll progress */
   useEffect(() => {
     const update = () => {
       const el  = document.documentElement;
       const max = el.scrollHeight - el.clientHeight;
-      setProgress(max > 0 ? el.scrollTop / max : 0);
+      const nextProgress = max > 0 ? el.scrollTop / max : 0;
+      el.style.setProperty('--scroll-progress', nextProgress);
     };
     update();
     window.addEventListener('scroll', update, { passive: true });
     return () => window.removeEventListener('scroll', update);
   }, []);
 
-  const knobTop = progress * (TRACK_H - KNOB_H);
   const isDark  = theme === 'dark';
 
   const handleClick = () => {
@@ -47,7 +43,7 @@ function ScrollThemeToggle({ theme, toggleTheme }) {
     >
       {/* ── Vertical track ── */}
       <div className="stt-track">
-        <div className="stt-track-fill" style={{ height: `${progress * 100}%` }} />
+        <div className="stt-track-fill" />
       </div>
 
       {/* ── Cap dots ── */}
@@ -57,7 +53,6 @@ function ScrollThemeToggle({ theme, toggleTheme }) {
       {/* ── The button — rides the track ── */}
       <button
         className={`stt-knob ${isDark ? 'stt-dark' : 'stt-light'}${hovered ? ' stt-hovered' : ''}`}
-        style={{ top: `${knobTop}px` }}
         onClick={handleClick}
         aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
       >
@@ -220,7 +215,7 @@ export default function Navbar() {
                 {theme === 'dark' ? <SunIcon /> : <MoonIcon />}
                 {theme === 'dark' ? 'Light Mode' : 'Dark Mode'}
               </button>
-              <a href="#contact" className="btn-primary" style={{ flex: 1, justifyContent: 'center' }}
+              <a href="#contact" className="btn-primary mobile-cta"
                 onClick={e => { e.preventDefault(); handleNavClick('#contact'); }}>
                 Get Started
               </a>

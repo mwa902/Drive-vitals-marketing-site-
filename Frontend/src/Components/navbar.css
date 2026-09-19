@@ -184,12 +184,17 @@
 .stt-track-fill {
   position: absolute;
   top: 0; left: 0; right: 0;
-  height: 0%;
+  height: 100%;
+  transform: scaleY(var(--scroll-progress, 0));
+  transform-origin: top;
   background: linear-gradient(to bottom, #1E6FFF, #7C3AED);
   border-radius: 3px;
   transition: height 0.08s linear;
   box-shadow: 0 0 6px rgba(30,111,255,0.4);
 }
+
+.stt-knob { top: calc(var(--scroll-progress, 0) * 116px); }
+.mobile-cta { flex: 1; justify-content: center; }
 
 /* Cap dots — top and bottom of track */
 .stt-dot {
