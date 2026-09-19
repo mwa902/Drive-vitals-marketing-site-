@@ -16,8 +16,8 @@ const offices = [
 ══════════════════════════════════════ */
 function PhoneModal({ onClose }) {
   useEffect(() => {
-    document.body.style.overflow = 'hidden';
-    return () => { document.body.style.overflow = ''; };
+    document.body.classList.add('modal-open');
+    return () => document.body.classList.remove('modal-open');
   }, []);
 
   return (
@@ -53,8 +53,8 @@ function PhoneModal({ onClose }) {
 ══════════════════════════════════════ */
 function EmailModal({ onClose }) {
   useEffect(() => {
-    document.body.style.overflow = 'hidden';
-    return () => { document.body.style.overflow = ''; };
+    document.body.classList.add('modal-open');
+    return () => document.body.classList.remove('modal-open');
   }, []);
 
   return (
@@ -98,8 +98,8 @@ function DemoModal({ onClose }) {
   const [error, setError] = useState('');
 
   useEffect(() => {
-    document.body.style.overflow = 'hidden';
-    return () => { document.body.style.overflow = ''; };
+    document.body.classList.add('modal-open');
+    return () => document.body.classList.remove('modal-open');
   }, []);
 
   const handleChange = e => setForm(prev => ({ ...prev, [e.target.name]: e.target.value }));
@@ -354,21 +354,19 @@ export default function Contact() {
             {contactOptions.map((opt, i) => (
               <div
                 key={i}
-                className="contact-option card"
-                style={{ '--opt-color': opt.color }}
+                className={`contact-option contact-option-${opt.modal || 'office'} card`}
                 onClick={() => opt.modal && setActiveModal(opt.modal)}
                 role={opt.modal ? 'button' : undefined}
                 tabIndex={opt.modal ? 0 : undefined}
                 onKeyDown={e => e.key === 'Enter' && opt.modal && setActiveModal(opt.modal)}
               >
-                <div className="co-icon-wrap" style={{ background: `${opt.color}18`, color: opt.color }}>
+                <div className="co-icon-wrap">
                   {opt.icon}
                 </div>
                 <h3 className="co-title">{opt.title}</h3>
                 <p className="co-desc">{opt.desc}</p>
                 <button
                   className="co-btn"
-                  style={{ color: opt.color, borderColor: opt.color }}
                   onClick={e => { e.stopPropagation(); opt.modal && setActiveModal(opt.modal); }}
                 >
                   {opt.action}
